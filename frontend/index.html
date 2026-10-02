@@ -1,77 +1,70 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J.A.R.V.I.S</title><link rel="stylesheet" href="style.css">
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d12">
+  <meta name="description" content="J.A.R.V.I.S personal AI assistant">
+  <title>J.A.R.V.I.S — Personal AI</title>
 
-</head><body><header>
-    <h1>J.A.R.V.I.S</h1>
-    <p>PERSONAL AI ASSISTANT</p>
-</header>
+  <!-- Existing CSS -->
+  <link rel="stylesheet" href="style.css?v=jarvis-stage-grid-scroll-v8-20260930-final">
 
-<div class="core">
-    <div class="ring r1"></div>
-    <div class="ring r2"></div>
-    <div class="center"></div>
-</div>
+  <!-- 👇 ORBS LIBRARY ADDED HERE 👇 -->
+  <script src="https://cdn.jsdelivr.net/npm/orbs@latest/dist/orbs.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orbs@latest/dist/orbs.css">
 
-<p class="core-text">SYSTEM READY</p>
+  <!-- 👇 INLINE STYLE FOR THE NEW ORB CONTAINER 👇 -->
+  <style>
+    /* Container for the live Orb */
+    #jarvis-core-container {
+      width: 150px;       /* Size of the orb */
+      height: 150px;
+      margin: 0 auto 20px auto; /* Center it horizontally */
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-<div class="status">
-    <h2>SYSTEM DIAGNOSTICS</h2>
+    /* Ensure canvas inside looks good */
+    #jarvis-core-container canvas {
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.4); /* Cyan Glow */
+      filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.6));
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="sidebar-top">
+        <a class="brand" href="./" aria-label="J.A.R.V.I.S home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><path d="M18 7v22M7 18h22M10.2 10.2l15.6 15.6M25.8 10.2 10.2 25.8"/><circle cx="18" cy="18" r="4"/></svg>
+          </span>
+          <span class="brand-copy"><strong>J.A.R.V.I.S</strong><small>PERSONAL AI</small></span>
+        </a>
+        <button class="icon-button sidebar-collapse" id="sidebar-toggle" type="button" aria-label="Collapse sidebar" title="Collapse sidebar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
 
-    <div class="row">
-        <span>AI ENGINE</span>
-        <b class="on">● OPERATIONAL</b>
-    </div>
+      <button class="new-chat" id="new-chat" type="button">
+        <span class="new-chat-icon" aria-hidden="true">+</span><span>New chat</span>
+      </button>
 
-    <div class="row">
-        <span>CONNECTION</span>
-        <b class="on">● ONLINE</b>
-    </div>
+      <div class="history-heading"><span>RECENT</span><span class="history-count" id="history-count"></span></div>
+      <div class="history-list" id="history-list" role="group" aria-label="Conversation history"></div>
+      <div class="sidebar-spacer"></div>
 
-    <div class="row">
-        <span>VOICE INTERFACE</span>
-        <b class="on">● READY</b>
-    </div>
+      <div class="sidebar-footer">
+        <button class="sidebar-link" id="settings-open" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 15 .1.1a1.7 1.7 0 0 1-2.4 2.4l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a1.7 1.7 0 0 1-3.4 0v-.2a1.7 1.7 0 0 0-2.9-1.2l-.1.1a1.7 1.7 0 0 1-2.4-2.4l.1-.1a1.7 1.7 0 0 0-1.2-2.9H4a1.7 1.7 0 0 1 0-3.4h.2a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a1.7 1.7 0 0 1 2.4-2.4l.1.1a1.7 1.7 0 0 0 2.9-1.2V2a1.7 1.7 0 0 1 3.4 0v.2a1.7 1.7 0 0 0 2.9 1.2l.1-.1a1.7 1.7 0 0 1 2.4 2.4l-.1.1a1.7 1.7 0 0 0 1.2 2.9h.2a1.7 1.7 0 0 1 0 3.4h-.2a1.7 1.7 0 0 0-1.2 2.9Z"/></svg>
+          <span>Settings</span>
+        </button>
+        <div class="profile-row"><span class="profile-avatar">V</span><span class="profile-name">Vamshi</span><span class="profile-label">PERSONAL</span></div>
+      </div>
+    </aside>
 
-    <div class="row">
-        <span>LONG-TERM MEMORY</span>
-        <b class="on">● ACTIVE</b>
-    </div>
-</div>
-
-<div class="chat" id="chat"></div>
-
-<div class="input-area">
-    <input
-        id="msg"
-        type="text"
-        placeholder="Enter a command for J.A.R.V.I.S..."
-    >
-
-    <button id="send">EXECUTE</button>
-
-    <button id="mic-btn" aria-label="Activate voice input">
-        🎙
-    </button>
-
-    <button id="cam-btn" aria-label="Analyze image">
-        📷
-    </button>
-
-    <button id="clear-btn">
-        CLEAR MEMORY
-    </button>
-
-    <input
-        id="img-input"
-        type="file"
-        accept="image/*"
-        style="display: none;"
-    >
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+    <button class="sidebar-backdrop" id="sidebar-backdrop" type="button" aria-label="Close navigation" hidden></button>
